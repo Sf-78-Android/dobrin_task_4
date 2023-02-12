@@ -1,0 +1,8 @@
+query ContinentsList {
+continents {
+      name
+      countries {
+             name
+      }
+   }
+}
