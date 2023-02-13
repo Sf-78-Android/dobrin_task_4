@@ -1,28 +1,24 @@
 package com.training.countriesapp
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
+import com.training.countriesapp.activities.CountryListActivity
+
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var btnCountryList : Button
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        btnCountryList = findViewById(R.id.btnListCountries)
 
-        GlobalScope.launch {
-            val response = apolloClient.query(CountryListQuery()).execute()
-
-            Log.i("CountryList", "Success ${response.data}")
-
-            val country = apolloClient.query(CountryDetailsQuery(code = "BG")).execute()
-
-            Log.i("CountryDetails", "Success ${country.data}")
-
-            val continents = apolloClient.query(ContinentsListQuery()).execute()
-            Log.i("ContinentList","Success ${continents.data}")
+        btnCountryList.setOnClickListener {
+            val intent = Intent(this, CountryListActivity::class.java)
+            startActivity(intent)
         }
-
     }
 }

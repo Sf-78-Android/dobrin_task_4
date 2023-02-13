@@ -11,6 +11,7 @@
 
 
     <ImageView
+        android:id="@+id/ivEarth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="65dp"
@@ -23,16 +24,19 @@
         android:textStyle="bold"
         android:layout_marginBottom="65dp"
         android:text="@string/welcome"
+        android:textColor="@color/welcome_message_color"
         android:textSize="30sp" />
 
     <Button
+        android:id="@+id/btnListCountries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/list_of_countries"
-        android:textColor="@color/git "
+        android:textColor="@color/black"
         android:layout_marginBottom="15dp"
         android:backgroundTint="@color/button_background_color"/>
     <Button
+        android:id="@+id/btnListContinents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/list_of_continents"
@@ -40,9 +44,10 @@
         android:textColor="@color/black"
         android:backgroundTint="@color/button_background_color"/>
     <Button
+        android:id="@+id/btnSearchCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/list_of_countries"
+        android:text="@string/search_for_country"
         android:textColor="@color/black"
         android:backgroundTint="@color/button_background_color"/>
 
