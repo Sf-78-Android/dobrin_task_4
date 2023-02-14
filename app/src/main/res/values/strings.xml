@@ -102,4 +102,8 @@
     <string name="phone_prefix">Phone prefix</string>
     <string name="currency">Currency</string>
     <string name="languages">Languages</string>
+    <string name="country_details">Country Details</string>
+    <string name="country_list_tag">CountryList</string>
+    <string name="refresh">Refresh</string>
+    <string name="search">Search</string>
 </resources>

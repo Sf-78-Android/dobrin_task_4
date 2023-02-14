@@ -6,7 +6,6 @@ import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.training.countriesapp.CountryDetailsQuery
 import com.training.countriesapp.R
@@ -15,8 +14,6 @@ import com.training.countriesapp.constants.Constants
 import com.training.countriesapp.constants.Constants.PHONE_PREFIX
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
-import kotlin.coroutines.coroutineContext
 
 class CountryDetailsActivity : AppCompatActivity()  {
    private lateinit var tvCountryName : TextView
@@ -32,7 +29,7 @@ class CountryDetailsActivity : AppCompatActivity()  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.country_view_details)
         val display = supportActionBar
-        display?.title = "Country Details"
+        display?.title = getString(R.string.country_details)
         display?.setDisplayHomeAsUpEnabled(true)
         val intent = intent
         tvCountryName = findViewById(R.id.tvCountryName)
@@ -49,7 +46,7 @@ class CountryDetailsActivity : AppCompatActivity()  {
             val code = intent.getStringExtra("code")
             val response = apolloClient.query(CountryDetailsQuery(code.toString())).execute()
 
-            Log.i("CountryList", "Success ${response.data}")
+            Log.i(getString(R.string.country_list_tag), "Success ${response.data}")
 
             runOnUiThread {
                 tvCountryName.text = response.data?.country?.name

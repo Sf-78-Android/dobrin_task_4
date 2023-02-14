@@ -14,13 +14,18 @@ import com.training.countriesapp.R
 import com.training.countriesapp.activities.CountryDetailsActivity
 import com.training.countriesapp.constants.Constants.FLAGS_LINK
 
-class ItemAdapter(private val context: Context, private val dataset: List<CountryListQuery.Country>?) :
+class ItemAdapter(
+    private val context: Context,
+    private val dataset: List<CountryListQuery.Country>?
+) :
     RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+    private var countryList: List<CountryListQuery.Country>? = dataset
+
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvCountryName: TextView = view.findViewById(R.id.tvCountryName)
         val tvCountryCapital: TextView = view.findViewById(R.id.tvCountryCapital)
         val tvCountryRegion: TextView = view.findViewById(R.id.tvCountryRegion)
-        val ivFlag : ImageView = view.findViewById(R.id.ivFlag)
+        val ivFlag: ImageView = view.findViewById(R.id.ivFlag)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -30,18 +35,18 @@ class ItemAdapter(private val context: Context, private val dataset: List<Countr
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val item = dataset?.get(position)
+        val item = countryList?.get(position)
         holder.tvCountryName.text = item?.name
         holder.tvCountryCapital.text = item?.capital
         holder.tvCountryRegion.text = item?.continent?.name
 
         Glide.with(holder.itemView)
-            .load(String.format(FLAGS_LINK,item?.code?.lowercase()))
+            .load(String.format(FLAGS_LINK, item?.code?.lowercase()))
             .into(holder.ivFlag)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, CountryDetailsActivity::class.java)
-            intent.putExtra("code",item?.code)
+            intent.putExtra("code", item?.code)
 
             context.startActivity(intent)
         }
