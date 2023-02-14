@@ -1,20 +1,10 @@
 query CountryList {
-countries {
-  code
-  name
-  native
-  phone
-  continent{
-    code
-    name
-  }
-  capital
-  currency
-     languages{
+    countries {
         code
         name
-        native
-        rtl
-        }
+        continent{
+             name
+         }
+        capital
     }
 }

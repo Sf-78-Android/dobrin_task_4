@@ -1,6 +1,7 @@
 package com.training.countriesapp.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.training.countriesapp.CountryListQuery
 import com.training.countriesapp.R
+import com.training.countriesapp.activities.CountryDetailsActivity
+import com.training.countriesapp.constants.Constants.FLAGS_LINK
 
 class ItemAdapter(private val context: Context, private val dataset: List<CountryListQuery.Country>?) :
     RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
-    class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+    class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvCountryName: TextView = view.findViewById(R.id.tvCountryName)
         val tvCountryCapital: TextView = view.findViewById(R.id.tvCountryCapital)
         val tvCountryRegion: TextView = view.findViewById(R.id.tvCountryRegion)
@@ -33,8 +36,15 @@ class ItemAdapter(private val context: Context, private val dataset: List<Countr
         holder.tvCountryRegion.text = item?.continent?.name
 
         Glide.with(holder.itemView)
-            .load("https://flagcdn.com/160x120/${item?.code?.lowercase()}.png")
+            .load(String.format(FLAGS_LINK,item?.code?.lowercase()))
             .into(holder.ivFlag)
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, CountryDetailsActivity::class.java)
+            intent.putExtra("code",item?.code)
+
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount() = dataset?.size ?: 0

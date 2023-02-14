@@ -11,4 +11,5 @@
     <color name="button_background_color">#bc6c25</color>
     <color name="welcome_message_color">#219ebc</color>
     <color name="country_card_background">#f4a261</color>
+    <color name="tag_color">#264653</color>
 </resources>

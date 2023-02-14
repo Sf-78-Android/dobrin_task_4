@@ -2,10 +2,9 @@ package com.training.countriesapp.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.training.countriesapp.CountryDetailsQuery
 import com.training.countriesapp.CountryListQuery
 import com.training.countriesapp.R
 import com.training.countriesapp.adapter.ItemAdapter
@@ -19,7 +18,9 @@ class CountryListActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_list)
-
+        val display = supportActionBar
+        display?.title = "Country List"
+        display?.setDisplayHomeAsUpEnabled(true)
         // Initialize data.
         GlobalScope.launch {
             val response = apolloClient.query(CountryListQuery()).execute()
@@ -34,7 +35,17 @@ class CountryListActivity : AppCompatActivity() {
                 recyclerView.setHasFixedSize(true)
             }
 
+        }
+    }
 
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
