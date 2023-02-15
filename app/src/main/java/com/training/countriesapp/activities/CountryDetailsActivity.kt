@@ -1,18 +1,16 @@
 package com.training.countriesapp.activities
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.training.countriesapp.CountryDetailsQuery
 import com.training.countriesapp.R
 import com.training.countriesapp.api.Retrofit
-import com.training.countriesapp.apolloClient
+import com.training.countriesapp.api.apolloClient
 import com.training.countriesapp.constants.Constants
 import com.training.countriesapp.constants.Constants.PHONE_PREFIX
 import kotlinx.coroutines.GlobalScope
@@ -30,7 +28,6 @@ class CountryDetailsActivity : AppCompatActivity() {
     private lateinit var tvPopulation: TextView
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_country_view_details)
@@ -51,11 +48,11 @@ class CountryDetailsActivity : AppCompatActivity() {
 
         GlobalScope.launch {
 
-            val code = intent.getStringExtra("code")
+            val code = intent.getStringExtra(getString(R.string.code))
 
             val response = apolloClient.query(CountryDetailsQuery(code.toString())).execute()
 
-            Log.i(getString(R.string.country_list_tag), "Success ${response.data}")
+            Log.i(getString(R.string.country_list_tag), "${response.data}")
 
 
             launch {
@@ -70,7 +67,7 @@ class CountryDetailsActivity : AppCompatActivity() {
                     try {
                         tvPopulation.text =
                             Retrofit.getPopulation(response.data?.country?.code).toString()
-                    } catch (e:java.lang.Exception) {
+                    } catch (e: java.lang.Exception) {
                         tvPopulation.text = getString(R.string.no_data)
                     }
                     val languages = response.data?.country?.languages

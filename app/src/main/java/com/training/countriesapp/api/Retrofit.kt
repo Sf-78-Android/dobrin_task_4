@@ -14,9 +14,10 @@ object Retrofit {
     var url = "https://restcountries.com/v2/"
 
 
-    @RequiresApi(Build.VERSION_CODES.N)
+
     fun getPopulation(code: String?): Int? {
-        return result?.stream()?.filter { it.alpha2Code == code }?.findFirst()?.get()?.population
+       return result?.find { countryPopulation -> countryPopulation.alpha2Code == code }?.population
+
     }
 
     fun getPopulationData() {

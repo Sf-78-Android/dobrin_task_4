@@ -1,4 +1,4 @@
-package com.training.countriesapp
+package com.training.countriesapp.api
 
 import com.apollographql.apollo3.ApolloClient
 

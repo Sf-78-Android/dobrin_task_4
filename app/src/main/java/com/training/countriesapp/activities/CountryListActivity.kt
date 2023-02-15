@@ -11,7 +11,7 @@ import com.training.countriesapp.CountryListQuery
 import com.training.countriesapp.R
 import com.training.countriesapp.adapter.ItemAdapter
 import com.training.countriesapp.api.Retrofit
-import com.training.countriesapp.apolloClient
+import com.training.countriesapp.api.apolloClient
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
