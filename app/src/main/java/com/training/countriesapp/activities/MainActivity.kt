@@ -1,12 +1,14 @@
-package com.training.countriesapp
+package com.training.countriesapp.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.training.countriesapp.activities.CountryListActivity
-import com.training.countriesapp.activities.NoInternetActivity
+import com.google.android.material.snackbar.Snackbar
+import com.training.countriesapp.R
 import com.training.countriesapp.constants.ConnectionCheck
+import com.training.countriesapp.constants.Constants
 
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +17,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val layout: View = findViewById(R.id.mainView)
+        val snackBar = Snackbar
+            .make(layout, Constants.NO_CONNECTION, Snackbar.LENGTH_LONG)
+            .setAction(Constants.RETRY, View.OnClickListener {
+                if (ConnectionCheck(this).checkInternetConnection()) {
+                    val intent = Intent(this, MainActivity::class.java)
+                    this.startActivity(intent)
+                }
+            })
 
         btnCountryList = findViewById(R.id.btnListCountries)
 
@@ -23,11 +34,9 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this, CountryListActivity::class.java)
                 startActivity(intent)
             } else {
-                val intent = Intent(this, NoInternetActivity::class.java)
-                this.startActivity(intent)
+                snackBar.show()
             }
         }
     }
-
 
 }

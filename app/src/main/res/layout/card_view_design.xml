@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,10 +18,10 @@
             android:layout_width="165dp"
             android:layout_height="151dp"
             android:layout_marginStart="15dp"
-            android:src="@drawable/afghanistan"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/afghanistan">
 
         </ImageView>
 
@@ -43,11 +42,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
-            tools:text="Bulgaria"
             android:textColor="@color/black"
             app:layout_constrainedWidth="true"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:text="Bulgaria" />
 
         <TextView
             android:id="@+id/textView2"
@@ -65,11 +64,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
-            tools:text="Sofia"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/textView2"
             app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_goneMarginTop="10dp" />
+            app:layout_goneMarginTop="10dp"
+            tools:text="Sofia" />
 
         <TextView
             android:id="@+id/textView3"
@@ -88,10 +87,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="4dp"
-            tools:text="Europe"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            tools:text="Europe" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

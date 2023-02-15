@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_main_color"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/background_main_color"
-    tools:context=".MainActivity">
+    tools:context=".activities.MainActivity">
 
 
     <ImageView
@@ -19,36 +20,30 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textStyle="bold"
         android:layout_marginBottom="65dp"
         android:text="@string/welcome"
+        android:textAlignment="center"
         android:textColor="@color/welcome_message_color"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnListCountries"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/list_of_countries"
-        android:textColor="@color/black"
         android:layout_marginBottom="15dp"
-        android:backgroundTint="@color/button_background_color"/>
+        android:backgroundTint="@color/button_background_color"
+        android:text="@string/list_of_countries"
+        android:textColor="@color/black" />
+
     <Button
         android:id="@+id/btnListContinents"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/list_of_continents"
         android:layout_marginBottom="15dp"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/button_background_color"/>
-    <Button
-        android:id="@+id/btnSearchCountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_for_country"
-        android:textColor="@color/black"
-        android:backgroundTint="@color/button_background_color"/>
+        android:backgroundTint="@color/button_background_color"
+        android:text="@string/list_of_continents"
+        android:textColor="@color/black" />
 
 
 </LinearLayout>

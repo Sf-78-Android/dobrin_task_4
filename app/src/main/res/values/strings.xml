@@ -106,4 +106,8 @@
     <string name="country_list_tag">CountryList</string>
     <string name="refresh">Refresh</string>
     <string name="search">Search</string>
+    <string name="country_list">Country List</string>
+    <string name="population">Population</string>
+    <string name="none">None</string>
+    <string name="no_data">No data available</string>
 </resources>
