@@ -15,6 +15,7 @@ object Constants {
     const val RESOURCE_NOT_FOUND = "RESOURCE_NOT_FOUND"
     const val ERROR = "ERROR"
     const val GENERIC_ERROR = "GENERIC_ERROR"
+    const val DEBOUNCE_PERIOD = 500L
 
 
 

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
-import com.training.countriesapp.R
 import com.training.countriesapp.constants.ConnectionCheck
 import com.training.countriesapp.constants.Constants
 import com.training.countriesapp.databinding.ActivityMainBinding
@@ -18,9 +17,8 @@ class MainView : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val layout: View = findViewById(R.id.mainView)
         val snackBar = Snackbar
-            .make(layout, Constants.NO_CONNECTION, Snackbar.LENGTH_LONG)
+            .make(binding.mainView, Constants.NO_CONNECTION, Snackbar.LENGTH_LONG)
             .setAction(Constants.RETRY, View.OnClickListener {
                 if (ConnectionCheck(this).checkInternetConnection()) {
                     val intent = Intent(this, MainView::class.java)

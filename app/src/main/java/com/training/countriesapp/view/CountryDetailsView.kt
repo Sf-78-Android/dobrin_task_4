@@ -1,97 +1,68 @@
-package com.training.countriesapp.activities
+package com.training.countriesapp.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
-import com.training.countriesapp.CountryDetailsQuery
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.training.countriesapp.R
-import com.training.countriesapp.api.Apollo
-import com.training.countriesapp.api.Retrofit
-import com.training.countriesapp.constants.Constants
-import com.training.countriesapp.constants.Constants.PHONE_PREFIX
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.training.countriesapp.adapter.DetailsAdapter
+import com.training.countriesapp.databinding.ActivityCountryDetailsBinding
+import com.training.countriesapp.model.LoadingState
+import com.training.countriesapp.viewmodel.CountryViewModel
 
-class CountryDetailsActivity : AppCompatActivity() {
-    private lateinit var tvCountryName: TextView
-    private lateinit var tvCountryCapital: TextView
-    private lateinit var tvCountryRegion: TextView
-    private lateinit var ivFlag: ImageView
-    private lateinit var tvNative: TextView
-    private lateinit var tvPhonePrefix: TextView
-    private lateinit var tvCurrency: TextView
-    private lateinit var tvLanguages: TextView
-    private lateinit var tvPopulation: TextView
-
+class CountryDetailsView : AppCompatActivity() {
+    private val viewModel: CountryViewModel by viewModels()
+    private lateinit var binding: ActivityCountryDetailsBinding
+    private var adapter = DetailsAdapter(mutableListOf())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_country_view_details)
+        binding = ActivityCountryDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         val display = supportActionBar
         display?.title = getString(R.string.country_details)
         display?.setDisplayHomeAsUpEnabled(true)
-        val intent = intent
-        tvCountryName = findViewById(R.id.tvCountryName)
-        tvCountryCapital = findViewById(R.id.tvCountryCapital)
-        tvCountryRegion = findViewById(R.id.tvCountryRegion)
-        ivFlag = findViewById(R.id.ivFlag)
-        tvNative = findViewById(R.id.tvNativeName)
-        tvPhonePrefix = findViewById(R.id.tvPhonePrefix)
-        tvCurrency = findViewById(R.id.tvCurrency)
-        tvLanguages = findViewById(R.id.tvLanguages)
-        tvPopulation = findViewById(R.id.tvPopulation)
 
-        GlobalScope.launch {
-
-            val code = intent.getStringExtra(getString(R.string.code))
-
-            val response = Apollo.apolloClient.query(CountryDetailsQuery(code.toString())).execute()
-
-            Log.i(getString(R.string.country_list_tag), "${response.data}")
-
-
-            launch {
-                runOnUiThread {
-                    tvCountryName.text = response.data?.country?.name
-                    tvCountryCapital.text = response.data?.country?.capital
-                    tvCountryRegion.text = response.data?.country?.continent?.name
-                    tvNative.text = response.data?.country?.native
-                    tvPhonePrefix.text =
-                        String.format(PHONE_PREFIX, response.data?.country?.phone)
-                    tvCurrency.text = response.data?.country?.currency
-                    try {
-                        tvPopulation.text =
-                            Retrofit.getPopulation(response.data?.country?.code).toString()
-                    } catch (e: java.lang.Exception) {
-                        tvPopulation.text = getString(R.string.no_data)
-                    }
-                    val languages = response.data?.country?.languages
-
-                    if (languages != null && languages.isNotEmpty()) {
-                        tvLanguages.text = languages[0].name
-                        for (language in 1 until languages.size) {
-                            tvLanguages.append(", ${languages[language].name}")
-                        }
-
-                    } else {
-                        tvLanguages.text = getString(R.string.none)
-                    }
-                    Glide.with(this@CountryDetailsActivity)
-                        .load(
-                            String.format(
-                                Constants.FLAGS_LINK,
-                                response.data?.country?.code?.lowercase()
-                            )
-                        )
-                        .into(ivFlag)
-                }
-            }
-        }
     }
+
+    override fun onResume() {
+        super.onResume()
+        initializeUI()
+        initializeObservers()
+
+        intent.getStringExtra("code")?.let { viewModel.onPopulationDataReady(it) }
+
+    }
+
+    private fun initializeObservers() {
+        viewModel.loadingStateLiveData.observe(this, Observer {
+            onLoadingStateChanged(it)
+        })
+
+        viewModel.countryDetailsLiveData.observe(this, Observer {
+            adapter.updateCountry(it)
+        })
+
+
+    }
+
+    private fun onLoadingStateChanged(state: LoadingState) {
+        binding.countryDetailsRV.visibility =
+            if (state == LoadingState.LOADED) View.VISIBLE else View.GONE
+        binding.errorTV.visibility = if (state == LoadingState.ERROR) View.VISIBLE else View.GONE
+        binding.loadingPB.visibility =
+            if (state == LoadingState.LOADING) View.VISIBLE else View.GONE
+    }
+
+    private fun initializeUI() {
+        binding.countryDetailsRV.adapter = adapter
+        binding.countryDetailsRV.layoutManager = LinearLayoutManager(this)
+
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

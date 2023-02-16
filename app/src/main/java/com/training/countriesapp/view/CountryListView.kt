@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.SearchView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.training.countriesapp.R
@@ -53,7 +52,6 @@ class CountryListView : AppCompatActivity() {
     }
 
     private fun onLoadingStateChanged(state: LoadingState) {
-        binding.searchET.visibility = if (state == LoadingState.LOADED) View.VISIBLE else View.GONE
         binding.countriesRV.visibility =
             if (state == LoadingState.LOADED) View.VISIBLE else View.GONE
         binding.errorTV.visibility = if (state == LoadingState.ERROR) View.VISIBLE else View.GONE
@@ -65,9 +63,6 @@ class CountryListView : AppCompatActivity() {
         binding.countriesRV.adapter = adapter
         binding.countriesRV.layoutManager = LinearLayoutManager(this)
 
-        binding.searchET.doOnTextChanged { text, start, before, count ->
-            viewModel.onSearchQuery(text.toString())
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -92,7 +87,7 @@ class CountryListView : AppCompatActivity() {
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-                        newText?.let{viewModel.onSearchQuery(it)}
+                    newText?.let { viewModel.onSearchQuery(it) }
                     return true
                 }
 

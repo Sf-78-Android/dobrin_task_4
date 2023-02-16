@@ -1,9 +1,11 @@
 package com.training.countriesapp.viewmodel
 
-import android.view.animation.Transformation
 import androidx.lifecycle.*
+import com.training.countriesapp.CountryDetailsQuery
 import com.training.countriesapp.CountryListQuery
-import com.training.countriesapp.model.CountriesDataProvider
+import com.training.countriesapp.constants.Constants.DEBOUNCE_PERIOD
+import com.training.countriesapp.model.CountriesMainDataProvider
+import com.training.countriesapp.model.CountriesPopulationDataProvider
 import com.training.countriesapp.model.LoadingState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -12,12 +14,13 @@ import kotlinx.coroutines.launch
 
 class CountryViewModel : ViewModel() {
     val countriesLiveData = MediatorLiveData<List<CountryListQuery.Country>?>()
+    val countryDetailsLiveData = MutableLiveData<List<CountryDetailsQuery.Country>?>()
     private val _queryLiveData = MutableLiveData<String>()
     private val _allCountriesLiveData = MutableLiveData<List<CountryListQuery.Country>?>()
     private var _searchCountriesLiveData: LiveData<List<CountryListQuery.Country>?>
     val loadingStateLiveData = MutableLiveData<LoadingState>()
     private var searchJob: Job? = null
-    private val debouncePeriod = 500L
+    private val debouncePeriod = DEBOUNCE_PERIOD
 
     init {
         _searchCountriesLiveData = Transformations.switchMap(_queryLiveData) {
@@ -28,7 +31,9 @@ class CountryViewModel : ViewModel() {
         }
         countriesLiveData.addSource(_searchCountriesLiveData) {
             countriesLiveData.value = it
+
         }
+
 
     }
 
@@ -42,7 +47,7 @@ class CountryViewModel : ViewModel() {
         loadingStateLiveData.value = LoadingState.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val countries = CountriesDataProvider.getAllCountries()
+                val countries = CountriesMainDataProvider.getAllCountries()
                 _allCountriesLiveData.postValue(countries)
                 loadingStateLiveData.postValue(LoadingState.LOADED)
             } catch (e: java.lang.Exception) {
@@ -69,7 +74,7 @@ class CountryViewModel : ViewModel() {
         loadingStateLiveData.value = LoadingState.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val countries = CountriesDataProvider.searchCountries(query)
+                val countries = CountriesMainDataProvider.searchCountries(query)
                 liveData.postValue(countries)
                 loadingStateLiveData.postValue(LoadingState.LOADED)
             } catch (e: java.lang.Exception) {
@@ -78,5 +83,25 @@ class CountryViewModel : ViewModel() {
         }
         return liveData
     }
+
+    fun onPopulationDataReady(code: String) {
+        val list:MutableList<CountryDetailsQuery.Country>? = mutableListOf()
+
+        loadingStateLiveData.value = LoadingState.LOADING
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val countries = CountriesPopulationDataProvider.getCountryData(code)
+                //val population = CountriesPopulationDataProvider.getPopulationData(code)
+                countries?.let {
+                        list?.add(it)
+                     }
+                countryDetailsLiveData.postValue(list)
+                loadingStateLiveData.postValue(LoadingState.LOADED)
+            } catch (e: java.lang.Exception) {
+                loadingStateLiveData.postValue(LoadingState.ERROR)
+            }
+        }
+    }
+
 
 }

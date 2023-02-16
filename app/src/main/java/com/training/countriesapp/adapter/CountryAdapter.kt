@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.training.countriesapp.CountryListQuery
-import com.training.countriesapp.activities.CountryDetailsActivity
+import com.training.countriesapp.R
 import com.training.countriesapp.constants.Constants.FLAGS_LINK
 import com.training.countriesapp.databinding.CardViewDesignBinding
+import com.training.countriesapp.view.CountryDetailsView
 
 class CountryAdapter(
     private val dataset: List<CountryListQuery.Country>?
@@ -24,14 +25,7 @@ class CountryAdapter(
         countryList?.addAll(newCountries as MutableList)
         notifyDataSetChanged()
     }
-    fun updateCountriesSearchQuery(query: String, newCountryList: MutableList<CountryListQuery.Country>?) {
-        countryList?.find { country -> country.name.contains(query)  }
-            ?.let { newCountryList?.add(it) }
-        countryList?.clear()
 
-        newCountryList?.let { countryList?.addAll(it) }
-            notifyDataSetChanged()
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val binding = CardViewDesignBinding
@@ -47,9 +41,8 @@ class CountryAdapter(
             .load(String.format(FLAGS_LINK, item?.code?.lowercase()))
             .into(holder.binding.ivFlag)
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, CountryDetailsActivity::class.java)
-            intent.putExtra("code", item?.code)
-
+            val intent = Intent(holder.itemView.context, CountryDetailsView::class.java)
+            intent.putExtra(holder.itemView.context.getString(R.string.code), item?.code)
             holder.itemView.context.startActivity(intent)
         }
     }

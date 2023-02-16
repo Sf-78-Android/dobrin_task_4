@@ -19,11 +19,12 @@ object Retrofit {
     private var result: List<CountryPopulation>? = null
 
     fun getPopulation(code: String?): Int? {
+        getPopulationData()
         return result?.find { countryPopulation -> countryPopulation.alpha2Code == code }?.population
 
     }
 
-    fun getPopulationData() {
+    private fun getPopulationData() {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(String.format(RETROFIT_API_LINK))
             .addConverterFactory(GsonConverterFactory.create())
