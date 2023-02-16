@@ -17,7 +17,7 @@
         android:theme="@style/Theme.CountriesApp"
         tools:targetApi="31">
         <activity
-            android:name=".activities.CountryListActivity"
+            android:name=".view.CountryListView"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -31,7 +31,7 @@
         </activity>
 
         <activity
-            android:name=".activities.CountryDetailsActivity"
+            android:name=".view.CountryDetailsActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -46,7 +46,7 @@
 
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".view.MainView"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

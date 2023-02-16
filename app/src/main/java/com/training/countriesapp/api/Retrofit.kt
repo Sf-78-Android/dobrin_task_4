@@ -1,8 +1,14 @@
 package com.training.countriesapp.api
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
+import com.training.countriesapp.constants.Constants.BAD_CONNECTION
+import com.training.countriesapp.constants.Constants.ERROR
+import com.training.countriesapp.constants.Constants.ERROR_400
+import com.training.countriesapp.constants.Constants.ERROR_404
+import com.training.countriesapp.constants.Constants.GENERIC_ERROR
+import com.training.countriesapp.constants.Constants.RESOURCE_NOT_FOUND
+import com.training.countriesapp.constants.Constants.RESULT_RESPONSE
+import com.training.countriesapp.constants.Constants.RETROFIT_API_LINK
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -11,18 +17,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object Retrofit {
     private var result: List<CountryPopulation>? = null
-    var url = "https://restcountries.com/v2/"
-
-
 
     fun getPopulation(code: String?): Int? {
-       return result?.find { countryPopulation -> countryPopulation.alpha2Code == code }?.population
+        return result?.find { countryPopulation -> countryPopulation.alpha2Code == code }?.population
 
     }
 
     fun getPopulationData() {
         val retrofit: Retrofit = Retrofit.Builder()
-            .baseUrl(String.format(url))
+            .baseUrl(String.format(RETROFIT_API_LINK))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service: CountryPopulationService = retrofit
@@ -41,18 +44,18 @@ object Retrofit {
                 if (response.isSuccessful) {
                     result = response.body()
 
-                    Log.i("RESULT_RESPONSE", "$result")
+                    Log.i(RESULT_RESPONSE, "$result")
 
                 } else {
                     when (response.code()) {
                         400 -> {
-                            Log.e("ERROR_400", "BAD_CONNECTION")
+                            Log.e(ERROR_400, BAD_CONNECTION)
                         }
                         404 -> {
-                            Log.e("ERROR_404", "RESOURCE_NOT_FOUND")
+                            Log.e(ERROR_404, RESOURCE_NOT_FOUND)
                         }
                         else -> {
-                            Log.e("ERROR", "GENERIC_ERROR")
+                            Log.e(ERROR, GENERIC_ERROR)
                         }
                     }
                 }

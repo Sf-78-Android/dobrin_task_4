@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.training.countriesapp.CountryDetailsQuery
 import com.training.countriesapp.R
+import com.training.countriesapp.api.Apollo
 import com.training.countriesapp.api.Retrofit
-import com.training.countriesapp.api.apolloClient
 import com.training.countriesapp.constants.Constants
 import com.training.countriesapp.constants.Constants.PHONE_PREFIX
 import kotlinx.coroutines.GlobalScope
@@ -44,13 +44,12 @@ class CountryDetailsActivity : AppCompatActivity() {
         tvCurrency = findViewById(R.id.tvCurrency)
         tvLanguages = findViewById(R.id.tvLanguages)
         tvPopulation = findViewById(R.id.tvPopulation)
-        var population: Int? = null
 
         GlobalScope.launch {
 
             val code = intent.getStringExtra(getString(R.string.code))
 
-            val response = apolloClient.query(CountryDetailsQuery(code.toString())).execute()
+            val response = Apollo.apolloClient.query(CountryDetailsQuery(code.toString())).execute()
 
             Log.i(getString(R.string.country_list_tag), "${response.data}")
 
