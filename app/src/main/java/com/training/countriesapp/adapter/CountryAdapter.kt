@@ -1,5 +1,6 @@
 package com.training.countriesapp.adapter
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -20,6 +21,7 @@ class CountryAdapter(
         dataset as MutableList<CountryListQuery.Country>?
 
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateCountries(newCountries: List<CountryListQuery.Country>?) {
         countryList?.clear()
         countryList?.addAll(newCountries as MutableList)

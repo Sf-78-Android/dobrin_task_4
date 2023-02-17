@@ -60,7 +60,6 @@ class CountryDetailsView : AppCompatActivity() {
     private fun initializeUI() {
         binding.countryDetailsRV.adapter = adapter
         binding.countryDetailsRV.layoutManager = LinearLayoutManager(this)
-
     }
 
 

@@ -23,4 +23,8 @@
     <string name="none">None</string>
     <string name="no_data">No data available</string>
     <string name="code">code</string>
+    <string name="continent">Continent</string>
+    <string name="total_country_count">Total Countries</string>
+    <string name="total_population">Total Population</string>
+    <string name="continent_list">List of continents</string>
 </resources>

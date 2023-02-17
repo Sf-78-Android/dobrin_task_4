@@ -16,6 +16,17 @@ object Constants {
     const val ERROR = "ERROR"
     const val GENERIC_ERROR = "GENERIC_ERROR"
     const val DEBOUNCE_PERIOD = 500L
+    const val CODE_TAG = "Code"
+    const val COUNTRY_TAG = "Country"
+    const val REGION_TAG = "Region"
+    const val CAPITAL_TAG = "Region"
+    const val PHONE_TAG = "Phone prefix"
+    const val LANGUAGES_TAG = "Languages"
+    const val POPULATION_TAG = "Population"
+    const val CURRENCY_TAG = "Currencies"
+    const val NATIVE_TAG = "Native name"
+    const val AREA_TAG = "Area"
+    const val SQUARE_KM = "%s km²"
 
 
 

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="6dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/country_card_background">
+
+        <ImageView
+            android:id="@+id/ivContinent"
+            android:layout_width="165dp"
+            android:layout_height="151dp"
+            android:layout_marginStart="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/australia">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/continentTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/continent"
+            android:textColor="@color/tag_color"
+            app:layout_constraintStart_toEndOf="@+id/ivContinent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvContinentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/black"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintStart_toStartOf="@+id/continentTag"
+            app:layout_constraintTop_toBottomOf="@+id/continentTag"
+            tools:text="North America" />
+
+        <TextView
+            android:id="@+id/totalCountriesTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/total_country_count"
+            android:textColor="@color/tag_color"
+            app:layout_constraintStart_toStartOf="@+id/continentTag"
+            app:layout_constraintTop_toBottomOf="@id/tvContinentName" />
+
+        <TextView
+            android:id="@+id/tvTotalCountries"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/black"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintStart_toStartOf="@+id/tvContinentName"
+            app:layout_constraintTop_toBottomOf="@+id/totalCountriesTag"
+            tools:text="0" />
+
+        <TextView
+            android:id="@+id/totalPopulationTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/total_population"
+            android:textColor="@color/tag_color"
+            app:layout_constraintStart_toStartOf="@+id/totalCountriesTag"
+            app:layout_constraintTop_toBottomOf="@id/tvTotalCountries" />
+
+        <TextView
+            android:id="@+id/tvTotalPopulation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintStart_toStartOf="@+id/tvContinentName"
+            app:layout_constraintTop_toBottomOf="@+id/totalPopulationTag"
+            tools:text="0" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

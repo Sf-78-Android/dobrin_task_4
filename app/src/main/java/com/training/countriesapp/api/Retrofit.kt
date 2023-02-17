@@ -16,15 +16,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object Retrofit {
-    private var result: List<CountryPopulation>? = null
+    private var result: List<CountryAdditionalData>? = null
 
     fun getPopulation(code: String?): Int? {
-        getPopulationData()
         return result?.find { countryPopulation -> countryPopulation.alpha2Code == code }?.population
-
+    }
+    fun getArea(code: String?): Double? {
+        return result?.find { countryArea -> countryArea.alpha2Code == code }?.area
     }
 
-    private fun getPopulationData() {
+
+    fun getAdditionalData() {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(String.format(RETROFIT_API_LINK))
             .addConverterFactory(GsonConverterFactory.create())
@@ -32,15 +34,15 @@ object Retrofit {
         val service: CountryPopulationService = retrofit
             .create(CountryPopulationService::class.java)
 
-        val listCall: Call<List<CountryPopulation>> = service
-            .getPopulation()
+        val listCall: Call<List<CountryAdditionalData>> = service
+            .getAdditionalData()
 
 
-        listCall.enqueue(object : Callback<List<CountryPopulation>> {
+        listCall.enqueue(object : Callback<List<CountryAdditionalData>> {
 
             override fun onResponse(
-                call: Call<List<CountryPopulation>>,
-                response: Response<List<CountryPopulation>>
+                call: Call<List<CountryAdditionalData>>,
+                response: Response<List<CountryAdditionalData>>
             ) {
                 if (response.isSuccessful) {
                     result = response.body()
@@ -62,7 +64,7 @@ object Retrofit {
                 }
             }
 
-            override fun onFailure(call: Call<List<CountryPopulation>>, t: Throwable) {
+            override fun onFailure(call: Call<List<CountryAdditionalData>>, t: Throwable) {
                 Log.e("ERROR", t.message.toString())
             }
         })

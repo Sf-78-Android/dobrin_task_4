@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface CountryPopulationService {
 
-    @GET("all?fields=alpha2Code,population")
-    fun getPopulation(
-    ): Call<List<CountryPopulation>>
+    @GET("all?fields=alpha2Code,population,area,timezones")
+    fun getAdditionalData(
+    ): Call<List<CountryAdditionalData>>
 }

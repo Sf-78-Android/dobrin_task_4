@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.CountryDetailsView">
+    tools:context=".view.ContinentView">
 
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/countryDetailsRV"
+        android:id="@+id/continentRV"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"

@@ -35,6 +35,15 @@ class MainView : AppCompatActivity() {
                 snackBar.show()
             }
         }
+
+        binding.btnListContinents.setOnClickListener {
+            if (ConnectionCheck(this).checkInternetConnection()) {
+                val intent = Intent(this, ContinentView::class.java)
+                startActivity(intent)
+            } else {
+                snackBar.show()
+            }
+        }
     }
 
 }
