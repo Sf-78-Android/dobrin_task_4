@@ -40,14 +40,6 @@ class DetailsAdapter(
     override fun onBindViewHolder(holder: CountryDetailsViewHolder, position: Int) {
         val item = country[position]
         item.let { holder.bind(it) }
-        /*
-               Glide.with(holder.itemView)
-                   .load(String.format(Constants.FLAGS_LINK, country[0].split(".")[1].lowercase()))
-                   .into(holder.binding.ivFlag)
-
-         */
-
-
     }
 
     override fun getItemCount() = country.size

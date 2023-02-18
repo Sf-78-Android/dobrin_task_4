@@ -21,6 +21,7 @@ object Retrofit {
     fun getPopulation(code: String?): Int? {
         return result?.find { countryPopulation -> countryPopulation.alpha2Code == code }?.population
     }
+
     fun getArea(code: String?): Double? {
         return result?.find { countryArea -> countryArea.alpha2Code == code }?.area
     }

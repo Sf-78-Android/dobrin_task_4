@@ -8,7 +8,7 @@ object Constants {
     const val PHONE_PREFIX = "+%s"
     const val NO_CONNECTION = "No internet connection. Please, reconnect and try again!"
     const val RETRY = "RETRY"
-    const val RESULT_RESPONSE ="RESULT_RESPONSE"
+    const val RESULT_RESPONSE = "RESULT_RESPONSE"
     const val ERROR_400 = "ERROR_400"
     const val BAD_CONNECTION = "BAD_CONNECTION"
     const val ERROR_404 = "ERROR_404"
@@ -27,8 +27,6 @@ object Constants {
     const val NATIVE_TAG = "Native name"
     const val AREA_TAG = "Area"
     const val SQUARE_KM = "%s km²"
-
-
 
 
 }

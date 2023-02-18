@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/continentListFragment"
+        android:name="com.training.countriesapp.view.ContinentListFragment"
+        android:label="fragment_continent_list"
+        tools:layout="@layout/fragment_continent_list" />
+    <fragment
+        android:id="@+id/countryListFragment"
+        android:name="com.training.countriesapp.view.CountryListFragment"
+        android:label="fragment_country_list"
+        tools:layout="@layout/fragment_country_list">
+        <action
+            android:id="@+id/action_countryListFragment_to_countryDetailsFragment"
+            app:destination="@id/countryDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/countryDetailsFragment"
+        android:name="com.training.countriesapp.view.CountryDetailsFragment"
+        android:label="fragment_country_details"
+        tools:layout="@layout/fragment_country_details">
+        <argument
+            android:name="countryCode"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.training.countriesapp.view.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_countryListFragment"
+            app:destination="@id/countryListFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_continentListFragment"
+            app:destination="@id/continentListFragment" />
+    </fragment>
+</navigation>

@@ -38,7 +38,6 @@ class ContinentAdapter(
         val item = countryList?.get(position)
         item?.let { holder.bind(it) }
 
-
         holder.itemView.setOnClickListener {
 
         }
@@ -46,12 +45,11 @@ class ContinentAdapter(
 
     override fun getItemCount() = dataset?.size ?: 0
 
-    inner class ContinentViewHolder(val binding: ContinentViewDesignBinding) :
+    inner class ContinentViewHolder(private val binding: ContinentViewDesignBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(continent: ContinentsListQuery.Continent) {
             binding.tvContinentName.text = continent.name
             binding.tvTotalCountries.text = continent.countries.size.toString()
-            binding.tvTotalPopulation.text = "0"
             when (continent.name) {
                 "Africa" -> binding.ivContinent.setImageResource(R.drawable.africa)
                 "Antarctica" -> binding.ivContinent.setImageResource(R.drawable.antarctica)

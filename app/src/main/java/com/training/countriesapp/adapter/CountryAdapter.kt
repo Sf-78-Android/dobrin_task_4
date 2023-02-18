@@ -1,16 +1,15 @@
 package com.training.countriesapp.adapter
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.training.countriesapp.CountryListQuery
-import com.training.countriesapp.R
 import com.training.countriesapp.constants.Constants.FLAGS_LINK
 import com.training.countriesapp.databinding.CardViewDesignBinding
-import com.training.countriesapp.view.CountryDetailsView
+import com.training.countriesapp.view.CountryListFragmentDirections
 
 class CountryAdapter(
     private val dataset: List<CountryListQuery.Country>?
@@ -43,9 +42,13 @@ class CountryAdapter(
             .load(String.format(FLAGS_LINK, item?.code?.lowercase()))
             .into(holder.binding.ivFlag)
         holder.itemView.setOnClickListener {
-            val intent = Intent(holder.itemView.context, CountryDetailsView::class.java)
-            intent.putExtra(holder.itemView.context.getString(R.string.code), item?.code)
-            holder.itemView.context.startActivity(intent)
+
+            holder.itemView.findNavController()
+                .navigate(
+                    CountryListFragmentDirections.actionCountryListFragmentToCountryDetailsFragment(
+                        item?.code
+                    )
+                )
         }
     }
 

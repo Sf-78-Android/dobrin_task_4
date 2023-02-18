@@ -91,31 +91,35 @@ class CountryViewModel : ViewModel() {
     }
 
     fun onPopulationDataReady(code: String) {
-        val list:MutableList<String> = mutableListOf()
+        val list: MutableList<String> = mutableListOf()
 
         loadingStateLiveData.value = LoadingState.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val country= CountriesAdditionalDataProvider.getCountryData(code)
+                val country = CountriesAdditionalDataProvider.getCountryData(code)
                 val population = CountriesAdditionalDataProvider.getPopulationData(code)
                 val area = CountriesAdditionalDataProvider.getArea(code)
                 country?.let {
-                        list.add("0.${country.code}")
-                        list.add("1.${country.name}")
-                        list.add("2.${country.capital}")
-                        list.add("3.${country.continent.name}")
-                        list.add("4.${country.native}")
-                        list.add("5.${country.phone}")
+                    list.add("0.${country.code}")
+                    list.add("1.${country.name}")
+                    list.add("2.${country.capital}")
+                    list.add("3.${country.continent.name}")
+                    list.add("4.${country.native}")
+                    list.add("5.${country.phone}")
                     var languagesList = ""
-                      for(language in country.languages){
-                          languagesList +="${language.name} - ${language.native}\n"
-                      }
+                    for (language in country.languages) {
+                        languagesList += if (country.languages.indexOf(language) < country.languages.size - 1) {
+                            "${language.name} - ${language.native}\n"
+                        } else {
+                            "${language.name} - ${language.native}"
+                        }
+                    }
 
-                        list.add("6.${languagesList}")
-                        list.add("7.${country.currency}")
-                        list.add("8.${area}")
-                        list.add("9.${population}")
-                     }
+                    list.add("6.${languagesList}")
+                    list.add("7.${country.currency}")
+                    list.add("8.${area}")
+                    list.add("9.${population}")
+                }
                 countryDetailsLiveData.postValue(list)
                 loadingStateLiveData.postValue(LoadingState.LOADED)
             } catch (e: java.lang.Exception) {
@@ -124,11 +128,11 @@ class CountryViewModel : ViewModel() {
         }
     }
 
-    fun onContinentDataReady(){
+    fun onContinentDataReady() {
         loadingStateLiveData.value = LoadingState.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val continents= ContinentsDataProvider.getContinents()
+                val continents = ContinentsDataProvider.getContinents()
 
 
                 continentsLiveData.postValue(continents)
