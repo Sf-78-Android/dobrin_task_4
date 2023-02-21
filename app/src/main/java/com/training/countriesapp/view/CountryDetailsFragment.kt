@@ -3,27 +3,31 @@ package com.training.countriesapp.view
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.training.countriesapp.R
 import com.training.countriesapp.adapter.DetailsAdapter
 import com.training.countriesapp.databinding.FragmentCountryDetailsBinding
-import com.training.countriesapp.model.LoadingState
+import com.training.countriesapp.repo.LoadingState
+import com.training.countriesapp.repo.Repository
 import com.training.countriesapp.viewmodel.CountryViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class CountryDetailsFragment : Fragment(R.layout.fragment_country_details) {
-    private val viewModel: CountryViewModel by viewModels()
+@AndroidEntryPoint
+class CountryDetailsFragment @Inject constructor(
+    detailsAdapter: DetailsAdapter
+) : Fragment(R.layout.fragment_country_details) {
+    private lateinit var viewModel: CountryViewModel
     private lateinit var fragmentBinding: FragmentCountryDetailsBinding
-    private var adapter = DetailsAdapter(mutableListOf())
+    private var adapter = detailsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentCountryDetailsBinding.bind(view)
         fragmentBinding = binding
-
+        viewModel = CountryViewModel(Repository())
     }
-
 
     override fun onResume() {
         super.onResume()

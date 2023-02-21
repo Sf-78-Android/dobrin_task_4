@@ -7,15 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.training.countriesapp.ContinentsListQuery
 import com.training.countriesapp.R
 import com.training.countriesapp.databinding.ContinentViewDesignBinding
+import javax.inject.Inject
 
-class ContinentAdapter(
-    private val dataset: List<ContinentsListQuery.Continent>?
-) :
+class ContinentAdapter @Inject constructor() :
     RecyclerView.Adapter<ContinentAdapter.ContinentViewHolder>() {
-
-    private var countryList: MutableList<ContinentsListQuery.Continent>? =
-        dataset as MutableList<ContinentsListQuery.Continent>?
-
+    private val dataset = mutableListOf<ContinentsListQuery.Continent>()
+    private var countryList: MutableList<ContinentsListQuery.Continent>? = dataset
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateContinents(newContinents: List<ContinentsListQuery.Continent>?) {
@@ -23,7 +20,6 @@ class ContinentAdapter(
         countryList?.addAll(newContinents as MutableList)
         notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

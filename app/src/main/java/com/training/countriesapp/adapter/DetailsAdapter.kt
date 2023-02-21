@@ -18,11 +18,10 @@ import com.training.countriesapp.constants.Constants.POPULATION_TAG
 import com.training.countriesapp.constants.Constants.REGION_TAG
 import com.training.countriesapp.constants.Constants.SQUARE_KM
 import com.training.countriesapp.databinding.CountryDetailsTvDesignBinding
+import javax.inject.Inject
 
-class DetailsAdapter(
-    var country: MutableList<String>
-
-) : RecyclerView.Adapter<CountryDetailsViewHolder>() {
+class DetailsAdapter @Inject constructor() : RecyclerView.Adapter<CountryDetailsViewHolder>() {
+    var country = mutableListOf<String>()
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateCountry(countryDetails: List<String>) {

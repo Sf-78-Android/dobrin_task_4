@@ -1,33 +1,36 @@
 package com.training.countriesapp.view
 
-import android.app.ActionBar
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.ui.AppBarConfiguration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.training.countriesapp.R
 import com.training.countriesapp.adapter.CountryAdapter
 import com.training.countriesapp.databinding.FragmentCountryListBinding
-import com.training.countriesapp.model.LoadingState
+import com.training.countriesapp.repo.LoadingState
+import com.training.countriesapp.repo.Repository
 import com.training.countriesapp.viewmodel.CountryViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class CountryListFragment : Fragment(R.layout.fragment_country_list) {
-    private val viewModel: CountryViewModel by viewModels()
+@AndroidEntryPoint
+class CountryListFragment @Inject constructor(
+    countryAdapter: CountryAdapter
+) : Fragment(R.layout.fragment_country_list) {
+    lateinit var viewModel: CountryViewModel
     private lateinit var fragmentBinding: FragmentCountryListBinding
-    private var adapter = CountryAdapter(mutableListOf())
+    var adapter = countryAdapter
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentCountryListBinding.bind(view)
         fragmentBinding = binding
+        viewModel = CountryViewModel(Repository())
         setHasOptionsMenu(true)
     }
 

@@ -1,20 +1,24 @@
 package com.training.countriesapp.viewmodel
 
 import androidx.lifecycle.*
+import androidx.test.espresso.idling.CountingIdlingResource
 import com.training.countriesapp.ContinentsListQuery
 import com.training.countriesapp.CountryListQuery
-import com.training.countriesapp.api.Retrofit
 import com.training.countriesapp.constants.Constants.DEBOUNCE_PERIOD
-import com.training.countriesapp.model.ContinentsDataProvider
-import com.training.countriesapp.model.CountriesAdditionalDataProvider
-import com.training.countriesapp.model.CountriesMainDataProvider
-import com.training.countriesapp.model.LoadingState
+import com.training.countriesapp.repo.LoadingState
+import com.training.countriesapp.repo.RepositoryInterface
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CountryViewModel : ViewModel() {
+
+@HiltViewModel
+class CountryViewModel @Inject constructor(
+    private var repository: RepositoryInterface
+) : ViewModel() {
     val countriesLiveData = MediatorLiveData<List<CountryListQuery.Country>?>()
     val continentsLiveData = MediatorLiveData<List<ContinentsListQuery.Continent>?>()
     val countryDetailsLiveData = MutableLiveData<List<String>>()
@@ -27,7 +31,6 @@ class CountryViewModel : ViewModel() {
 
 
     init {
-        Retrofit.getAdditionalData()
 
         _searchCountriesLiveData = Transformations.switchMap(_queryLiveData) {
             fetchCountriesByQuery(it)
@@ -44,24 +47,26 @@ class CountryViewModel : ViewModel() {
     }
 
     fun onViewReady() {
+
         if (_allCountriesLiveData.value.isNullOrEmpty()) {
             fetchAllCountries()
         }
+
     }
 
     private fun fetchAllCountries() {
         loadingStateLiveData.value = LoadingState.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val countries = CountriesMainDataProvider.getAllCountries()
+                val countries = repository.getAllCountries()
                 _allCountriesLiveData.postValue(countries)
                 loadingStateLiveData.postValue(LoadingState.LOADED)
+
             } catch (e: java.lang.Exception) {
                 loadingStateLiveData.postValue(LoadingState.ERROR)
             }
         }
     }
-
 
     fun onSearchQuery(query: String) {
         searchJob?.cancel()
@@ -75,12 +80,12 @@ class CountryViewModel : ViewModel() {
         }
     }
 
-    private fun fetchCountriesByQuery(query: String): LiveData<List<CountryListQuery.Country>?> {
+    fun fetchCountriesByQuery(query: String): LiveData<List<CountryListQuery.Country>?> {
         val liveData = MutableLiveData<List<CountryListQuery.Country>?>()
         loadingStateLiveData.value = LoadingState.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val countries = CountriesMainDataProvider.searchCountries(query)
+                val countries = repository.searchCountries(query)
                 liveData.postValue(countries)
                 loadingStateLiveData.postValue(LoadingState.LOADED)
             } catch (e: java.lang.Exception) {
@@ -96,9 +101,9 @@ class CountryViewModel : ViewModel() {
         loadingStateLiveData.value = LoadingState.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val country = CountriesAdditionalDataProvider.getCountryData(code)
-                val population = CountriesAdditionalDataProvider.getPopulationData(code)
-                val area = CountriesAdditionalDataProvider.getArea(code)
+                val country = repository.getCountryData(code)
+                val population = repository.getPopulationData(code)
+                val area = repository.getArea(code)
                 country?.let {
                     list.add("0.${country.code}")
                     list.add("1.${country.name}")
@@ -132,9 +137,7 @@ class CountryViewModel : ViewModel() {
         loadingStateLiveData.value = LoadingState.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val continents = ContinentsDataProvider.getContinents()
-
-
+                val continents = repository.getContinents()
                 continentsLiveData.postValue(continents)
                 loadingStateLiveData.postValue(LoadingState.LOADED)
             } catch (e: java.lang.Exception) {
@@ -142,6 +145,5 @@ class CountryViewModel : ViewModel() {
             }
         }
     }
-
 
 }

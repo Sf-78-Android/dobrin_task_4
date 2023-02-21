@@ -1,4 +1,4 @@
-package com.training.countriesapp.model
+package com.training.countriesapp.repo
 
 enum class LoadingState {
     LOADING,

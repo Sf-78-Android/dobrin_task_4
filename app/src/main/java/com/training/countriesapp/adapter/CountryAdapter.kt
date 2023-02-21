@@ -10,14 +10,12 @@ import com.training.countriesapp.CountryListQuery
 import com.training.countriesapp.constants.Constants.FLAGS_LINK
 import com.training.countriesapp.databinding.CardViewDesignBinding
 import com.training.countriesapp.view.CountryListFragmentDirections
+import javax.inject.Inject
 
-class CountryAdapter(
-    private val dataset: List<CountryListQuery.Country>?
-) :
+class CountryAdapter @Inject constructor() :
     RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
-
-    private var countryList: MutableList<CountryListQuery.Country>? =
-        dataset as MutableList<CountryListQuery.Country>?
+    private val dataset = mutableListOf<CountryListQuery.Country>()
+    private var countryList: MutableList<CountryListQuery.Country>? = dataset
 
 
     @SuppressLint("NotifyDataSetChanged")
@@ -26,7 +24,6 @@ class CountryAdapter(
         countryList?.addAll(newCountries as MutableList)
         notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         val binding = CardViewDesignBinding
@@ -37,26 +34,23 @@ class CountryAdapter(
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
         val item = countryList?.get(position)
         item?.let { holder.bind(it) }
-
-        Glide.with(holder.itemView)
-            .load(String.format(FLAGS_LINK, item?.code?.lowercase()))
-            .into(holder.binding.ivFlag)
-        holder.itemView.setOnClickListener {
-
-            holder.itemView.findNavController()
-                .navigate(
-                    CountryListFragmentDirections.actionCountryListFragmentToCountryDetailsFragment(
-                        item?.code
-                    )
-                )
-        }
     }
 
-    override fun getItemCount() = dataset?.size ?: 0
+    override fun getItemCount() = dataset.size
 
-    inner class CountryViewHolder(val binding: CardViewDesignBinding) :
+    inner class CountryViewHolder(private val binding: CardViewDesignBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(country: CountryListQuery.Country) {
+            Glide.with(binding.ivFlag).load(String.format(FLAGS_LINK, country.code.lowercase()))
+                .into(binding.ivFlag)
+            binding.ivFlag.setOnClickListener {
+                binding.ivFlag.findNavController()
+                    .navigate(
+                        CountryListFragmentDirections.actionCountryListFragmentToCountryDetailsFragment(
+                            country.code
+                        )
+                    )
+            }
             binding.tvCountryName.text = country.name
             binding.tvCountryCapital.text = country.capital
             binding.tvCountryRegion.text = country.continent.name
