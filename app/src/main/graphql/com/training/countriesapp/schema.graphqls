@@ -1,99 +1,99 @@
 type Country {
-  code: ID!
+    code: ID!
 
-  name: String!
+    name: String!
 
-  native: String!
+    native: String!
 
-  phone: String!
+    phone: String!
 
-  continent: Continent!
+    continent: Continent!
 
-  capital: String
+    capital: String
 
-  currency: String
+    currency: String
 
-  languages: [Language!]!
+    languages: [Language!]!
 
-  emoji: String!
+    emoji: String!
 
-  emojiU: String!
+    emojiU: String!
 
-  states: [State!]!
+    states: [State!]!
 }
 
 type Continent {
-  code: ID!
+    code: ID!
 
-  name: String!
+    name: String!
 
-  countries: [Country!]!
+    countries: [Country!]!
 }
 
 type Language {
-  code: ID!
+    code: ID!
 
-  name: String
+    name: String
 
-  native: String
+    native: String
 
-  rtl: Boolean!
+    rtl: Boolean!
 }
 
 type State {
-  code: String
+    code: String
 
-  name: String!
+    name: String!
 
-  country: Country!
+    country: Country!
 }
 
 input StringQueryOperatorInput {
-  eq: String
+    eq: String
 
-  ne: String
+    ne: String
 
-  in: [String]
+    in: [String]
 
-  nin: [String]
+    nin: [String]
 
-  regex: String
+    regex: String
 
-  glob: String
+    glob: String
 }
 
 input CountryFilterInput {
-  code: StringQueryOperatorInput
+    code: StringQueryOperatorInput
 
-  currency: StringQueryOperatorInput
+    currency: StringQueryOperatorInput
 
-  continent: StringQueryOperatorInput
+    continent: StringQueryOperatorInput
 }
 
 input ContinentFilterInput {
-  code: StringQueryOperatorInput
+    code: StringQueryOperatorInput
 }
 
 input LanguageFilterInput {
-  code: StringQueryOperatorInput
+    code: StringQueryOperatorInput
 }
 
 type Query {
-  _entities(representations: [_Any!]!): [_Entity]!
+    _entities(representations: [_Any!]!): [_Entity]!
 
-  _service: _Service!
+    _service: _Service!
 
-  countries(filter: CountryFilterInput): [Country!]!
+    countries(filter: CountryFilterInput): [Country!]!
 
-  country(code: ID!): Country
+    country(code: ID!): Country
 
-  continents(filter: ContinentFilterInput): [Continent!]!
+    continents(filter: ContinentFilterInput): [Continent!]!
 
-  continent(code: ID!): Continent
+    continent(code: ID!): Continent
 
-  languages(filter: LanguageFilterInput): [Language!]!
+    languages(filter: LanguageFilterInput): [Language!]!
 
-  language(code: ID!): Language
+    language(code: ID!): Language
 }
 
 union _Entity = Country|Continent|Language
@@ -101,12 +101,12 @@ union _Entity = Country|Continent|Language
 scalar _Any
 
 type _Service {
-  """
-  The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied
-  """
-  sdl: String
+    """
+    The sdl representing the federated service capabilities. Includes federation directives, removes federation types, and includes rest of full schema after schema directives have been applied
+    """
+    sdl: String
 }
 
 schema {
-  query: Query
+    query: Query
 }
