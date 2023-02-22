@@ -107,23 +107,27 @@ class CountryViewModel @Inject constructor(
                 country?.let {
                     list.add("0.${country.code}")
                     list.add("1.${country.name}")
-                    list.add("2.${country.capital}")
+                    list.add("2.${country.capital ?: "Not available"}")
                     list.add("3.${country.continent.name}")
                     list.add("4.${country.native}")
                     list.add("5.${country.phone}")
                     var languagesList = ""
-                    for (language in country.languages) {
-                        languagesList += if (country.languages.indexOf(language) < country.languages.size - 1) {
-                            "${language.name} - ${language.native}\n"
-                        } else {
-                            "${language.name} - ${language.native}"
+                    if (!country.languages.isNullOrEmpty()) {
+                        for (language in country.languages) {
+                            languagesList += if (country.languages.indexOf(language) < country.languages.size - 1) {
+                                "${language.name ?: "Not available"} - ${language.native ?: "Not available"}\n"
+                            } else {
+                                "${language.name ?: "Not available"} - ${language.native ?: "Not available"}"
+                            }
                         }
+                    } else {
+                        languagesList = "Not available"
                     }
 
                     list.add("6.${languagesList}")
-                    list.add("7.${country.currency}")
-                    list.add("8.${area}")
-                    list.add("9.${population}")
+                    list.add("7.${country.currency ?: "Not available"}")
+                    list.add("8.${area ?: "Not available"}")
+                    list.add("9.${population ?: "Not available"}")
                 }
                 countryDetailsLiveData.postValue(list)
                 loadingStateLiveData.postValue(LOADED)

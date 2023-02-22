@@ -20,16 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object Retrofit {
     private var result: List<CountryAdditionalData>? = null
 
-    fun getPopulation(code: String?): Int? {
-        return result?.find { countryPopulation -> countryPopulation.alpha2Code == code }?.population
-    }
-
-    fun getArea(code: String?): Double? {
-        return result?.find { countryArea -> countryArea.alpha2Code == code }?.area
-    }
-
-
-    fun getAdditionalData() {
+     fun getAdditionalData() : List<CountryAdditionalData>?  {
         val retrofit: Retrofit = Retrofit.Builder()
             .baseUrl(String.format(RETROFIT_API_LINK))
             .addConverterFactory(GsonConverterFactory.create())
@@ -71,5 +62,6 @@ object Retrofit {
                 Log.e("ERROR", t.message.toString())
             }
         })
+         return result
     }
 }

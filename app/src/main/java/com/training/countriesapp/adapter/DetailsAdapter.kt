@@ -8,28 +8,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.training.countriesapp.adapter.DetailsAdapter.CountryDetailsViewHolder
 import com.training.countriesapp.constants.Constants
+import com.training.countriesapp.constants.Constants.AREA
 import com.training.countriesapp.constants.Constants.AREA_TAG
+import com.training.countriesapp.constants.Constants.CAPITAL
 import com.training.countriesapp.constants.Constants.CAPITAL_TAG
+import com.training.countriesapp.constants.Constants.CODE
 import com.training.countriesapp.constants.Constants.CODE_TAG
 import com.training.countriesapp.constants.Constants.COUNTRY_TAG
+import com.training.countriesapp.constants.Constants.CURRENCY
 import com.training.countriesapp.constants.Constants.CURRENCY_TAG
-import com.training.countriesapp.constants.Constants.EIGHT
-import com.training.countriesapp.constants.Constants.FIVE
-import com.training.countriesapp.constants.Constants.FOUR
+import com.training.countriesapp.constants.Constants.LANGUAGES
 import com.training.countriesapp.constants.Constants.LANGUAGES_TAG
+import com.training.countriesapp.constants.Constants.NAME
+import com.training.countriesapp.constants.Constants.NATIVE_NAME
 import com.training.countriesapp.constants.Constants.NATIVE_TAG
-import com.training.countriesapp.constants.Constants.NINE
-import com.training.countriesapp.constants.Constants.ONE
+import com.training.countriesapp.constants.Constants.PHONE
 import com.training.countriesapp.constants.Constants.PHONE_PREFIX
 import com.training.countriesapp.constants.Constants.PHONE_TAG
+import com.training.countriesapp.constants.Constants.POPULATION
 import com.training.countriesapp.constants.Constants.POPULATION_TAG
+import com.training.countriesapp.constants.Constants.REGION
 import com.training.countriesapp.constants.Constants.REGION_TAG
-import com.training.countriesapp.constants.Constants.SEVEN
-import com.training.countriesapp.constants.Constants.SIX
 import com.training.countriesapp.constants.Constants.SQUARE_KM
-import com.training.countriesapp.constants.Constants.THREE
-import com.training.countriesapp.constants.Constants.TWO
-import com.training.countriesapp.constants.Constants.ZERO
 import com.training.countriesapp.databinding.CountryDetailsTvDesignBinding
 import javax.inject.Inject
 
@@ -64,7 +64,7 @@ class DetailsAdapter @Inject constructor() : RecyclerView.Adapter<CountryDetails
             val values = param.split(".")
 
             when (values[0]) {
-                ZERO -> {
+                CODE -> {
                     Glide.with(binding.ivFlag)
                         .load(String.format(Constants.FLAGS_LINK, values[1].lowercase()))
                         .into(binding.ivFlag)
@@ -72,39 +72,39 @@ class DetailsAdapter @Inject constructor() : RecyclerView.Adapter<CountryDetails
                     binding.tvValue.text = values[1]
                     binding.tvTag.text = CODE_TAG
                 }
-                ONE -> {
+                NAME -> {
                     binding.tvValue.text = values[1]
                     binding.tvTag.text = COUNTRY_TAG
                 }
-                TWO -> {
+                CAPITAL -> {
                     binding.tvValue.text = values[1]
                     binding.tvTag.text = CAPITAL_TAG
                 }
-                THREE -> {
+                REGION -> {
                     binding.tvValue.text = values[1]
                     binding.tvTag.text = REGION_TAG
                 }
-                FOUR -> {
+                NATIVE_NAME -> {
                     binding.tvValue.text = values[1]
                     binding.tvTag.text = NATIVE_TAG
                 }
-                FIVE -> {
+                PHONE -> {
                     binding.tvValue.text = String.format(PHONE_PREFIX, values[1])
                     binding.tvTag.text = PHONE_TAG
                 }
-                SIX -> {
+                LANGUAGES -> {
                     binding.tvValue.text = values[1]
                     binding.tvTag.text = LANGUAGES_TAG
                 }
-                SEVEN -> {
+                CURRENCY -> {
                     binding.tvValue.text = values[1]
                     binding.tvTag.text = CURRENCY_TAG
                 }
-                EIGHT -> {
+                AREA -> {
                     binding.tvValue.text = String.format(SQUARE_KM, values[1])
                     binding.tvTag.text = AREA_TAG
                 }
-                NINE -> {
+                POPULATION -> {
                     binding.tvValue.text = values[1]
                     binding.tvTag.text = POPULATION_TAG
                 }

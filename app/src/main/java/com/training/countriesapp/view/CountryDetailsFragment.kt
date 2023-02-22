@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.training.countriesapp.R
 import com.training.countriesapp.adapter.DetailsAdapter
+import com.training.countriesapp.constants.Constants.DATA_NAME
 import com.training.countriesapp.databinding.FragmentCountryDetailsBinding
 import com.training.countriesapp.repo.LoadingState
 import com.training.countriesapp.repo.Repository
@@ -33,7 +34,7 @@ class CountryDetailsFragment @Inject constructor(
         super.onResume()
         initializeUI()
         initializeObservers()
-        val code = requireArguments().getString("countryCode")
+        val code = requireArguments().getString(DATA_NAME)
         code?.let { viewModel.onPopulationDataReady(it) }
 
     }

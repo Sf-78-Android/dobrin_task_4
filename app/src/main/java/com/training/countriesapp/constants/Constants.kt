@@ -35,16 +35,18 @@ object Constants {
     const val NORTH_AMERICA = "North America"
     const val SOUTH_AMERICA = "South America"
     const val OCEANIA = "Oceania"
-    const val ZERO ="0"
-    const val ONE ="1"
-    const val TWO ="2"
-    const val THREE ="3"
-    const val FOUR ="4"
-    const val FIVE ="5"
-    const val SIX ="6"
-    const val SEVEN ="7"
-    const val EIGHT ="8"
-    const val NINE ="9"
+    const val DATA_NAME = "countryCode"
+
+    const val CODE ="0"
+    const val NAME ="1"
+    const val CAPITAL ="2"
+    const val REGION ="3"
+    const val NATIVE_NAME ="4"
+    const val PHONE ="5"
+    const val LANGUAGES ="6"
+    const val CURRENCY ="7"
+    const val AREA ="8"
+    const val POPULATION ="9"
 
 
 

@@ -41,9 +41,6 @@ class ContinentAdapter @Inject constructor() :
         val item = countryList?.get(position)
         item?.let { holder.bind(it) }
 
-        holder.itemView.setOnClickListener {
-
-        }
     }
 
     override fun getItemCount() = dataset.size

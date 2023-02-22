@@ -1,11 +1,11 @@
 package com.training.countriesapp.repo
 
 import android.util.Log
-import com.bumptech.glide.Glide.init
 import com.training.countriesapp.ContinentsListQuery
 import com.training.countriesapp.CountryDetailsQuery
 import com.training.countriesapp.CountryListQuery
 import com.training.countriesapp.api.Apollo
+import com.training.countriesapp.api.CountryAdditionalData
 import com.training.countriesapp.api.Retrofit
 import javax.inject.Inject
 
@@ -13,9 +13,10 @@ import javax.inject.Inject
 class Repository @Inject constructor() : RepositoryInterface {
     private var country: CountryDetailsQuery.Country? = null
     private var countries: List<CountryListQuery.Country>? = mutableListOf()
+    private var additionalData: List<CountryAdditionalData>? = null
 
     init {
-        Retrofit.getAdditionalData()
+        additionalData = Retrofit.getAdditionalData()
     }
 
     override suspend fun getContinents(): List<ContinentsListQuery.Continent>? {
@@ -32,11 +33,11 @@ class Repository @Inject constructor() : RepositoryInterface {
     }
 
     override fun getPopulationData(code: String): Int? {
-        return Retrofit.getPopulation(code)
+        return additionalData?.find { countryPopulation -> countryPopulation.alpha2Code == code }?.population
     }
 
     override fun getArea(code: String): Double? {
-        return Retrofit.getArea(code)
+        return additionalData?.find { countryArea -> countryArea.alpha2Code == code }?.area
     }
 
     override suspend fun getAllCountries(): List<CountryListQuery.Country>? {
