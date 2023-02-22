@@ -5,6 +5,8 @@ import com.training.countriesapp.constants.Constants.BAD_CONNECTION
 import com.training.countriesapp.constants.Constants.ERROR
 import com.training.countriesapp.constants.Constants.ERROR_400
 import com.training.countriesapp.constants.Constants.ERROR_404
+import com.training.countriesapp.constants.Constants.FOUR_HUNDRED
+import com.training.countriesapp.constants.Constants.FOUR_HUNDRED_AND_FOUR
 import com.training.countriesapp.constants.Constants.GENERIC_ERROR
 import com.training.countriesapp.constants.Constants.RESOURCE_NOT_FOUND
 import com.training.countriesapp.constants.Constants.RESULT_RESPONSE
@@ -52,10 +54,10 @@ object Retrofit {
 
                 } else {
                     when (response.code()) {
-                        400 -> {
+                        FOUR_HUNDRED -> {
                             Log.e(ERROR_400, BAD_CONNECTION)
                         }
-                        404 -> {
+                        FOUR_HUNDRED_AND_FOUR -> {
                             Log.e(ERROR_404, RESOURCE_NOT_FOUND)
                         }
                         else -> {

@@ -14,10 +14,8 @@ class Repository @Inject constructor() : RepositoryInterface {
     private var country: CountryDetailsQuery.Country? = null
     private var countries: List<CountryListQuery.Country>? = mutableListOf()
 
-
     init {
         Retrofit.getAdditionalData()
-
     }
 
     override suspend fun getContinents(): List<ContinentsListQuery.Continent>? {

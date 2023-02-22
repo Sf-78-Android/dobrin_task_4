@@ -6,6 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.training.countriesapp.ContinentsListQuery
 import com.training.countriesapp.R
+import com.training.countriesapp.constants.Constants.AFRICA
+import com.training.countriesapp.constants.Constants.ANTARCTICA
+import com.training.countriesapp.constants.Constants.ASIA
+import com.training.countriesapp.constants.Constants.EUROPE
+import com.training.countriesapp.constants.Constants.NORTH_AMERICA
+import com.training.countriesapp.constants.Constants.OCEANIA
+import com.training.countriesapp.constants.Constants.SOUTH_AMERICA
 import com.training.countriesapp.databinding.ContinentViewDesignBinding
 import javax.inject.Inject
 
@@ -39,7 +46,7 @@ class ContinentAdapter @Inject constructor() :
         }
     }
 
-    override fun getItemCount() = dataset?.size ?: 0
+    override fun getItemCount() = dataset.size
 
     inner class ContinentViewHolder(private val binding: ContinentViewDesignBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -47,13 +54,13 @@ class ContinentAdapter @Inject constructor() :
             binding.tvContinentName.text = continent.name
             binding.tvTotalCountries.text = continent.countries.size.toString()
             when (continent.name) {
-                "Africa" -> binding.ivContinent.setImageResource(R.drawable.africa)
-                "Antarctica" -> binding.ivContinent.setImageResource(R.drawable.antarctica)
-                "Asia" -> binding.ivContinent.setImageResource(R.drawable.asia)
-                "Europe" -> binding.ivContinent.setImageResource(R.drawable.europe)
-                "North America" -> binding.ivContinent.setImageResource(R.drawable.north_america)
-                "South America" -> binding.ivContinent.setImageResource(R.drawable.south_america)
-                "Oceania" -> binding.ivContinent.setImageResource(R.drawable.australia)
+                AFRICA -> binding.ivContinent.setImageResource(R.drawable.africa)
+                ANTARCTICA -> binding.ivContinent.setImageResource(R.drawable.antarctica)
+                ASIA -> binding.ivContinent.setImageResource(R.drawable.asia)
+                EUROPE -> binding.ivContinent.setImageResource(R.drawable.europe)
+                NORTH_AMERICA -> binding.ivContinent.setImageResource(R.drawable.north_america)
+                SOUTH_AMERICA -> binding.ivContinent.setImageResource(R.drawable.south_america)
+                OCEANIA -> binding.ivContinent.setImageResource(R.drawable.australia)
             }
         }
     }

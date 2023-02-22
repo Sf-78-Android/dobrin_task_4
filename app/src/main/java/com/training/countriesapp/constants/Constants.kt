@@ -26,6 +26,27 @@ object Constants {
     const val NATIVE_TAG = "Native name"
     const val AREA_TAG = "Area"
     const val SQUARE_KM = "%s km²"
+    const val FOUR_HUNDRED = 400
+    const val FOUR_HUNDRED_AND_FOUR = 404
+    const val AFRICA = "Africa"
+    const val ANTARCTICA = "Antarctica"
+    const val ASIA = "Asia"
+    const val EUROPE = "Europe"
+    const val NORTH_AMERICA = "North America"
+    const val SOUTH_AMERICA = "South America"
+    const val OCEANIA = "Oceania"
+    const val ZERO ="0"
+    const val ONE ="1"
+    const val TWO ="2"
+    const val THREE ="3"
+    const val FOUR ="4"
+    const val FIVE ="5"
+    const val SIX ="6"
+    const val SEVEN ="7"
+    const val EIGHT ="8"
+    const val NINE ="9"
+
+
 
 
 }
