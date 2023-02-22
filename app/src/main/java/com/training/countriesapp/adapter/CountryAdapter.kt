@@ -44,8 +44,8 @@ class CountryAdapter @Inject constructor() :
 
             Glide.with(binding.ivFlag).load(String.format(FLAGS_LINK, country.code.lowercase()))
                 .into(binding.ivFlag)
-            binding.ivFlag.setOnClickListener {
-                binding.ivFlag.findNavController()
+            binding.root.setOnClickListener {
+                binding.root.findNavController()
                     .navigate(
                         CountryListFragmentDirections.actionCountryListFragmentToCountryDetailsFragment(
                             country.code

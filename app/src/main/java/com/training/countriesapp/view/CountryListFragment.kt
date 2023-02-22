@@ -32,11 +32,14 @@ class CountryListFragment @Inject constructor(
 
         fragmentBinding.vSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+
                 return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                newText?.let { viewModel.onSearchQuery(it) }
+                newText?.let {
+                    viewModel.onSearchQuery(it)
+                }
                 return true
             }
 

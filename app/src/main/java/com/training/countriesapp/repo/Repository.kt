@@ -1,6 +1,7 @@
 package com.training.countriesapp.repo
 
 import android.util.Log
+import com.bumptech.glide.Glide.init
 import com.training.countriesapp.ContinentsListQuery
 import com.training.countriesapp.CountryDetailsQuery
 import com.training.countriesapp.CountryListQuery
@@ -13,8 +14,10 @@ class Repository @Inject constructor() : RepositoryInterface {
     private var country: CountryDetailsQuery.Country? = null
     private var countries: List<CountryListQuery.Country>? = mutableListOf()
 
+
     init {
         Retrofit.getAdditionalData()
+
     }
 
     override suspend fun getContinents(): List<ContinentsListQuery.Continent>? {
