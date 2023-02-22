@@ -41,6 +41,7 @@ class CountryAdapter @Inject constructor() :
     inner class CountryViewHolder(private val binding: CardViewDesignBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(country: CountryListQuery.Country) {
+
             Glide.with(binding.ivFlag).load(String.format(FLAGS_LINK, country.code.lowercase()))
                 .into(binding.ivFlag)
             binding.ivFlag.setOnClickListener {

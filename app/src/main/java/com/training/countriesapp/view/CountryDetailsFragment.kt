@@ -63,5 +63,4 @@ class CountryDetailsFragment @Inject constructor(
         fragmentBinding.countryDetailsRV.adapter = adapter
         fragmentBinding.countryDetailsRV.layoutManager = LinearLayoutManager(view?.context)
     }
-
 }

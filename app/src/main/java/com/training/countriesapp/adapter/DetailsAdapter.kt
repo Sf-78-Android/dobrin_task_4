@@ -2,9 +2,12 @@ package com.training.countriesapp.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.training.countriesapp.adapter.DetailsAdapter.CountryDetailsViewHolder
+import com.training.countriesapp.constants.Constants
 import com.training.countriesapp.constants.Constants.AREA_TAG
 import com.training.countriesapp.constants.Constants.CAPITAL_TAG
 import com.training.countriesapp.constants.Constants.CODE_TAG
@@ -39,6 +42,7 @@ class DetailsAdapter @Inject constructor() : RecyclerView.Adapter<CountryDetails
     override fun onBindViewHolder(holder: CountryDetailsViewHolder, position: Int) {
         val item = country[position]
         item.let { holder.bind(it) }
+
     }
 
     override fun getItemCount() = country.size
@@ -48,8 +52,13 @@ class DetailsAdapter @Inject constructor() : RecyclerView.Adapter<CountryDetails
         RecyclerView.ViewHolder(binding.root) {
         fun bind(param: String) {
             val values = param.split(".")
+
             when (values[0]) {
                 "0" -> {
+                    Glide.with(binding.ivFlag)
+                        .load(String.format(Constants.FLAGS_LINK, values[1].lowercase()))
+                        .into(binding.ivFlag)
+                    binding.ivFlag.visibility = View.VISIBLE
                     binding.tvValue.text = values[1]
                     binding.tvTag.text = CODE_TAG
                 }
@@ -88,9 +97,6 @@ class DetailsAdapter @Inject constructor() : RecyclerView.Adapter<CountryDetails
                 "9" -> {
                     binding.tvValue.text = values[1]
                     binding.tvTag.text = POPULATION_TAG
-                }
-                else -> {
-
                 }
             }
         }

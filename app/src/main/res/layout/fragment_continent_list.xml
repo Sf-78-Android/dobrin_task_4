@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".view.ContinentListFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/continentRV"
         android:layout_width="0dp"
@@ -32,8 +31,8 @@
         android:id="@+id/errorTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:text="@string/error_message"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

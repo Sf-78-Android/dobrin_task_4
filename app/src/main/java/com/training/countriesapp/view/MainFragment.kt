@@ -2,8 +2,10 @@ package com.training.countriesapp.view
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.google.android.material.snackbar.Snackbar
 import com.training.countriesapp.R
 import com.training.countriesapp.constants.ConnectionCheck
@@ -21,6 +23,10 @@ class MainFragment @Inject constructor() : Fragment(R.layout.fragment_main) {
         val binding = FragmentMainBinding.bind(view)
         fragmentBinding = binding
 
+        NavigationUI.setupActionBarWithNavController(
+            requireActivity() as AppCompatActivity,
+            findNavController(),
+        )
         val snackBar = Snackbar
             .make(binding.mainFragment, Constants.NO_CONNECTION, Snackbar.LENGTH_LONG)
 

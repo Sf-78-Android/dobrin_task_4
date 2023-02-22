@@ -6,7 +6,6 @@ import com.google.common.truth.Truth.assertThat
 import com.training.countriesapp.MainCoroutineRule
 import com.training.countriesapp.getOrAwaitValueTest
 import com.training.countriesapp.repo.FakeRepository
-import com.training.countriesapp.repo.Repository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule

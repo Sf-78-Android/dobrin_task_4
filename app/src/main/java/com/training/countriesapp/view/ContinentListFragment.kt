@@ -1,5 +1,6 @@
 package com.training.countriesapp.view
 
+
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -27,7 +28,6 @@ class ContinentListFragment @Inject constructor(
         val binding = FragmentContinentListBinding.bind(view)
         fragmentBinding = binding
         viewModel = CountryViewModel(Repository())
-
     }
 
     override fun onResume() {

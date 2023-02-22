@@ -12,7 +12,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-   @Singleton
-   @Provides
-   fun injectRepositoryInterface() = Repository() as RepositoryInterface
+    @Singleton
+    @Provides
+    fun injectRepositoryInterface() = Repository() as RepositoryInterface
 }

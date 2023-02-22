@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".view.CountryListFragment">
 
+    <SearchView
+        android:id="@+id/vSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:queryHint="Search here"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/countriesRV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/countriesRV"
@@ -16,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/vSearch" />
 
     <ProgressBar
         android:id="@+id/loadingPB"

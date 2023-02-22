@@ -1,7 +1,6 @@
 package com.training.countriesapp.viewmodel
 
 import androidx.lifecycle.*
-import androidx.test.espresso.idling.CountingIdlingResource
 import com.training.countriesapp.ContinentsListQuery
 import com.training.countriesapp.CountryListQuery
 import com.training.countriesapp.constants.Constants.DEBOUNCE_PERIOD

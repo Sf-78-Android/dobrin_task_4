@@ -27,13 +27,14 @@ import javax.inject.Inject
 @HiltAndroidTest
 @ExperimentalCoroutinesApi
 class CountryListFragmentTest {
-    private val countryViewModel = CountryViewModel(FakeRepository())
+    private var countryViewModel = CountryViewModel(FakeRepository())
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
 
     @get: Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
+
 
     @Inject
     lateinit var fragmentFactory: CountryFragmentFactory
@@ -55,9 +56,12 @@ class CountryListFragmentTest {
         }
 
         Espresso.onView(ViewMatchers.withId(R.id.countriesRV)).perform(
+            RecyclerViewActions.scrollToPosition<CountryAdapter.CountryViewHolder>(1),
             RecyclerViewActions.actionOnItemAtPosition<CountryAdapter.CountryViewHolder>(
-                0,click()
-            ))
+                0, click()
+            )
+        )
+
 
         Mockito.verify(navController).navigate(
             CountryListFragmentDirections.actionCountryListFragmentToCountryDetailsFragment("AD")

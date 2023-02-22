@@ -1,8 +1,6 @@
 package com.training.countriesapp.view
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -31,7 +29,18 @@ class CountryListFragment @Inject constructor(
         val binding = FragmentCountryListBinding.bind(view)
         fragmentBinding = binding
         viewModel = CountryViewModel(Repository())
-        setHasOptionsMenu(true)
+
+        fragmentBinding.vSearch.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { viewModel.onSearchQuery(it) }
+                return true
+            }
+
+        })
     }
 
     override fun onResume() {
@@ -56,6 +65,8 @@ class CountryListFragment @Inject constructor(
     private fun onLoadingStateChanged(state: LoadingState) {
         fragmentBinding.countriesRV.visibility =
             if (state == LoadingState.LOADED) View.VISIBLE else View.GONE
+        fragmentBinding.vSearch.visibility =
+            if (state == LoadingState.LOADED) View.VISIBLE else View.GONE
         fragmentBinding.errorTV.visibility =
             if (state == LoadingState.ERROR) View.VISIBLE else View.GONE
         fragmentBinding.loadingPB.visibility =
@@ -65,29 +76,6 @@ class CountryListFragment @Inject constructor(
     private fun initializeUI() {
         fragmentBinding.countriesRV.adapter = adapter
         fragmentBinding.countriesRV.layoutManager = LinearLayoutManager(view?.context)
-
     }
-
-    @Deprecated("Deprecated in Java")
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_country_list, menu)
-        val searchItem = menu.findItem(R.id.menu_search)
-        if (searchItem != null) {
-            val searchView = searchItem.actionView as SearchView
-            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String?): Boolean {
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String?): Boolean {
-                    newText?.let { viewModel.onSearchQuery(it) }
-                    return true
-                }
-
-            })
-        }
-    }
-
 }
 

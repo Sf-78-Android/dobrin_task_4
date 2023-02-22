@@ -8,31 +8,44 @@
     <fragment
         android:id="@+id/continentListFragment"
         android:name="com.training.countriesapp.view.ContinentListFragment"
-        android:label="fragment_continent_list"
-        tools:layout="@layout/fragment_continent_list" />
+        android:label="Continent List"
+        tools:layout="@layout/fragment_continent_list">
+        <action
+            android:id="@+id/action_continentListFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:popUpTo="@id/mainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/countryListFragment"
         android:name="com.training.countriesapp.view.CountryListFragment"
-        android:label="fragment_country_list"
+        android:label="Contries List"
         tools:layout="@layout/fragment_country_list">
         <action
             android:id="@+id/action_countryListFragment_to_countryDetailsFragment"
             app:destination="@id/countryDetailsFragment" />
+        <action
+            android:id="@+id/action_countryListFragment_pop_including_mainFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/countryDetailsFragment"
         android:name="com.training.countriesapp.view.CountryDetailsFragment"
-        android:label="fragment_country_details"
+        android:label="Country Details"
         tools:layout="@layout/fragment_country_details">
         <argument
             android:name="countryCode"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_countryDetailsFragment_to_countryListFragment"
+            app:destination="@id/countryListFragment"
+            app:popUpTo="@id/countryListFragment" />
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.training.countriesapp.view.MainFragment"
-        android:label="fragment_main"
+        android:label="Countries App"
         tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_countryListFragment"

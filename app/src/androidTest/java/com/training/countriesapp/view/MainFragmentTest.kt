@@ -30,7 +30,7 @@ class MainFragmentTest {
 
     @Before
     fun setup() {
-       hiltRule.inject()
+        hiltRule.inject()
 
     }
 
@@ -41,7 +41,7 @@ class MainFragmentTest {
         launchFragmentInHiltContainer<MainFragment>(
             factory = fragmentFactory
         ) {
-            Navigation.setViewNavController(requireView(),navController)
+            Navigation.setViewNavController(requireView(), navController)
         }
 
         Espresso
@@ -60,7 +60,7 @@ class MainFragmentTest {
         launchFragmentInHiltContainer<MainFragment>(
             factory = fragmentFactory
         ) {
-            Navigation.setViewNavController(requireView(),navController)
+            Navigation.setViewNavController(requireView(), navController)
         }
 
         Espresso
